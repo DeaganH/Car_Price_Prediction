@@ -73,7 +73,7 @@ elif st.session_state.page == "Predict Price":
         'transmission_type': transmission_type
     }
     if st.button("Predict Price"):
-        lin_reg_model = pickle.load(open('linear_regression_model.pkl', 'rb'))
+        lin_reg_model = pickle.load(open('random_forest_model.pkl', 'rb'))
         input_df = preprocess(input_data, affordable_brands, scalar)
         predicted_price = lin_reg_model.predict(input_df)[0]
         predicted_price = np.expm1(predicted_price)
