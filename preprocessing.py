@@ -2,7 +2,6 @@ import numpy as np
 import pickle
 import pandas as pd
 
-lin_reg_model = pickle.load(open('random_forest_model.pkl', 'rb'))
 scalar = {
     'mileage': {'mean': 19.78092609521131, 'scale': 4.1246159779166796},
     'max_power': {'mean': 4.544331741315781, 'scale': 0.3452326733560519},
@@ -77,15 +76,3 @@ def preprocess(input, affordable_brands, scalar):
 
     input_df = pd.DataFrame.from_dict(feature_dict)
     return input_df
-
-input_df = preprocess(input, affordable_brands, scalar)
-
-print(input_df)
-
-predicted_price = lin_reg_model.predict(input_df)[0]
-
-print(predicted_price)
-
-# apply reverse log transformation on predicted price
-predicted_price = np.expm1(predicted_price)
-print(f"Predicted Selling Price: ₹{predicted_price:,.2f}")
