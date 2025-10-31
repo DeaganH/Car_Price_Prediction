@@ -1,26 +1,5 @@
 import numpy as np
-import pickle
 import pandas as pd
-
-scalar = {
-    'mileage': {'mean': 19.78092609521131, 'scale': 4.1246159779166796},
-    'max_power': {'mean': 4.544331741315781, 'scale': 0.3452326733560519},
-    'vehicle_age': {'mean': 1.867031195033685, 'scale': 0.4341900646206074}, 
-    'engine': {'mean': 7.245724006330207, 'scale': 0.3036524847678331}
- }
-affordable_brands = ['Datsun','Force','Ford','Honda','Hyundai','Mahindra',
-                     'Maruti','Renault','Skoda','Tata','Volkswagen']
-
-input = {
-    'mileage': 13.00,
-    'engine': 1493,
-    'max_power': 100.00, 
-    'vehicle_age': 18,
-    'seats': 5,
-    'brand': 'Maruti',
-    'fuel_type': 'petrol',
-    'transmission_type': 'manual'
-}
 
 def preprocess(input, affordable_brands, scalar):
     """

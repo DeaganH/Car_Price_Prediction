@@ -2,7 +2,21 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 import pickle
-from preprocessing import preprocess, affordable_brands, scalar
+from preprocessing import preprocess
+
+# Global variables
+
+lin_reg_model = pickle.load(open('random_forest_model.pkl', 'rb'))
+
+scalar = {
+    'mileage': {'mean': 19.78092609521131, 'scale': 4.1246159779166796},
+    'max_power': {'mean': 4.544331741315781, 'scale': 0.3452326733560519},
+    'vehicle_age': {'mean': 1.867031195033685, 'scale': 0.4341900646206074}, 
+    'engine': {'mean': 7.245724006330207, 'scale': 0.3036524847678331}
+ }
+
+affordable_brands = ['Datsun','Force','Ford','Honda','Hyundai','Mahindra',
+                     'Maruti','Renault','Skoda','Tata','Volkswagen']
 
 car_brands = ['Maruti', 'Hyundai', 'Ford', 'Renault', 'Mini', 'Mercedes-Benz',
        'Toyota', 'Volkswagen', 'Honda', 'Mahindra', 'Datsun', 'Tata',
@@ -73,7 +87,6 @@ elif st.session_state.page == "Predict Price":
         'transmission_type': transmission_type
     }
     if st.button("Predict Price"):
-        lin_reg_model = pickle.load(open('random_forest_model.pkl', 'rb'))
         input_df = preprocess(input_data, affordable_brands, scalar)
         predicted_price = lin_reg_model.predict(input_df)[0]
         predicted_price = np.expm1(predicted_price)
